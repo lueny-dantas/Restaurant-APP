@@ -13,8 +13,11 @@ import br.com.alura.panucci.ui.theme.PanucciTheme
 
 class BottomAppBarItem(
     val label: String,
-    val icon: ImageVector
-)
+    val icon: ImageVector,
+    val route: String
+) {
+
+}
 
 @Composable
 fun PanucciBottomAppBar(

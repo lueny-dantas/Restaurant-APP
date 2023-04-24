@@ -14,6 +14,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import br.com.alura.panucci.sampledata.bottomAppBarItems
 import br.com.alura.panucci.sampledata.sampleProductWithImage
@@ -22,62 +25,98 @@ import br.com.alura.panucci.ui.components.BottomAppBarItem
 import br.com.alura.panucci.ui.components.PanucciBottomAppBar
 import br.com.alura.panucci.ui.screens.*
 import br.com.alura.panucci.ui.theme.PanucciTheme
+import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val navigationController = rememberNavController()
-            Log.i("MainActivity", "onCreate: teste do navigation $navigationController")
-            val initialScreen = "Destaques"
-            val screens = remember {
-                mutableStateListOf(initialScreen)
+            val navController = rememberNavController()
+            val backStackEntryState by navController.currentBackStackEntryAsState()
+            val currencyDestination = backStackEntryState?.destination
+
+            LaunchedEffect(Unit) {
+                navController.addOnDestinationChangedListener { _, _, _ ->
+                    val routes = navController.backQueue.map {
+                        it.destination.route
+                    }
+                    Log.i("MainActivity", "onCreate: back stack - $routes")
+                }
             }
-            Log.i("MainActivity", "onCreate: screens ${screens.toList()}")
-            val currentScreen = screens.last()
-            BackHandler(screens.size > 1) {
-                screens.removeLast()
-            }
+
+
             PanucciTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    var selectedItem by remember(currentScreen) {
-                        val item = bottomAppBarItems.find { currentScreen == it.label }
+                    var selectedItem by remember(currencyDestination) {
+                        val item = currencyDestination?.let { destination ->
+                            bottomAppBarItems.find {
+                                it.route == destination.route
+                            }
+                        } ?: bottomAppBarItems.first()
                         mutableStateOf(item)
                     }
                     PanucciApp(
-                        bottomAppBarItemSelected = selectedItem ?: bottomAppBarItems.first(),
+                        bottomAppBarItemSelected = selectedItem,
                         onBottomAppBarItemSelectedChange = {
                             selectedItem = it
-                            screens.add(it.label)
+                            val route = it.route
+                            navController.navigate(route) {
+                                launchSingleTop = true
+                                popUpTo(route)
+                            }
                         },
                         onFabClick = {
-                            screens.add("Pedido")
+                            navController.navigate("checkout")
                         }) {
-                        when (currentScreen) {
-                            "Destaques" -> HighlightsListScreen(
-                                products = sampleProducts,
-                                onOrderClick = {
-                                    screens.add("Pedido")
-                                },
-                                onProductClick = {
-                                    screens.add("DetalhesProduto")
-                                }
-                            )
-                            "Menu" -> MenuListScreen(
-                                products = sampleProducts
-                            )
-                            "Bebidas" -> DrinksListScreen(
-                                products = sampleProducts + sampleProducts
-                            )
-                            "DetalhesProduto" -> ProductDetailsScreen(
-                                product = sampleProductWithImage
-                            )
-                            "Pedido" -> CheckoutScreen(products = sampleProducts)
+                        NavHost(
+                            navController = navController,
+                            startDestination = "highlight"
+                        ) {
+                            composable("highlight") {
+                                HighlightsListScreen(
+                                    products = sampleProducts,
+                                    onNavigateToDetails = {
+                                        navController.navigate("productDetails")
+                                    },
+                                    onNavigateToCheckout = {
+                                        navController.navigate("checkout")
+                                    },
+                                )
+                            }
+                            composable("menu") {
+                                MenuListScreen(
+                                    products = sampleProducts,
+                                    onNavigateToDetails = {
+                                        navController.navigate("productDetails")
+                                    },
+                                )
+                            }
+                            composable("drinks") {
+                                DrinksListScreen(
+                                    products = sampleProducts,
+                                    onNavigateToDetails = {
+                                        navController.navigate("productDetails")
+                                    },
+                                )
+                            }
+                            composable("productDetails") {
+                                ProductDetailsScreen(
+                                    product = sampleProducts.random(),
+                                    onNavigateToDetails = {
+                                        navController.navigate("checkout")
+                                    },
+                                )
+                            }
+                            composable("checkout") {
+                                CheckoutScreen(products = sampleProducts)
+                            }
+
                         }
+
                     }
                 }
             }
