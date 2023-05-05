@@ -3,6 +3,7 @@ package br.com.alura.panucci.navigation
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import br.com.alura.panucci.sampledata.sampleProducts
 import br.com.alura.panucci.ui.screens.HighlightsListScreen
@@ -23,6 +24,6 @@ fun NavGraphBuilder.highLightsScreen(navController: NavHostController) {
     }
 }
 
-fun NavController.navigateToHighLights(){
-    navigate(highLightsRoute)
+fun NavController.navigateToHighLights(navOptions: NavOptions? = null) {
+    navigate(highLightsRoute, navOptions)
 }
