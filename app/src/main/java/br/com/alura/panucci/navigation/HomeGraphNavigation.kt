@@ -3,12 +3,12 @@ package br.com.alura.panucci.navigation
 import androidx.navigation.*
 import br.com.alura.panucci.ui.components.BottomAppBarItem
 
-internal const val  homeGraphRoute = "home"
+internal const val homeGraphRoute = "home"
 
 fun NavGraphBuilder.homeGraph(navController: NavHostController) {
     navigation(
         startDestination = highLightsRoute,
-        route = " home"
+        route = homeGraphRoute
     ) {
         highLightsScreen(navController)
         menuScreen(navController)
