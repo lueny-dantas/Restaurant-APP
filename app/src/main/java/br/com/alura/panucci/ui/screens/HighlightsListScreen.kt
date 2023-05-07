@@ -23,10 +23,11 @@ import br.com.alura.panucci.ui.uistate.HighlightsListUiState
 fun HighlightsListScreen(
     modifier: Modifier = Modifier,
     title: String = "Destaques do dia",
-    onNavigateToDetails: (Product) -> Unit = {},
-    onNavigateToCheckout: () -> Unit = {},
-    uiState: HighlightsListUiState = HighlightsListUiState()
-) {
+    onOrderClick: () -> Unit = {},
+    onProductClick: (Product) -> Unit = {},
+    uiState: HighlightsListUiState = HighlightsListUiState(),
+
+    ) {
     val products = uiState.products
     Column(
         modifier
@@ -53,9 +54,9 @@ fun HighlightsListScreen(
                 HighlightProductCard(
                     product = p,
                     Modifier.clickable {
-                        onNavigateToDetails(p)
+                        onProductClick(p)
                     },
-                    onOrderClick = onNavigateToCheckout
+                    onOrderClick = onOrderClick
                 )
             }
         }
@@ -70,7 +71,8 @@ fun HighlightsListScreenPreview() {
             HighlightsListScreen(
                 title = "Destaques do dia",
                 uiState = HighlightsListUiState(
-                    products = sampleProducts)
+                    products = sampleProducts
+                )
             )
         }
     }

@@ -22,9 +22,9 @@ import coil.compose.AsyncImage
 fun ProductDetailsScreen(
     uiState: ProductDetailsUiState,
     modifier: Modifier = Modifier,
-    onNavigateToCheckout: () -> Unit = {},
-    onTryFindProductAgain: () -> Unit = {},
-    onBackStack: () -> Unit = {}
+    onTryFindProductAgainClick: () -> Unit = {},
+    onOrderClick: () -> Unit = {},
+    onBackClick: () -> Unit = {},
 ) {
     when (uiState) {
         ProductDetailsUiState.Failure -> {
@@ -36,11 +36,11 @@ fun ProductDetailsScreen(
             ) {
                 Text(text = "Falha ao buscar produto")
                 Spacer(modifier = Modifier.height(8.dp))
-                Button(onClick = onTryFindProductAgain) {
+                Button(onClick = onTryFindProductAgainClick) {
                     Text(text = "Tentar buscar novamente")
                 }
                 Spacer(modifier = Modifier.height(8.dp))
-                TextButton(onClick = onBackStack) {
+                TextButton(onClick = onBackClick) {
                     Text(text = "Voltar")
                 }
             }
@@ -83,7 +83,7 @@ fun ProductDetailsScreen(
                     Text(product.price.toPlainString(), fontSize = 18.sp)
                     Text(product.description)
                     Button(
-                        onClick = { onNavigateToCheckout() },
+                        onClick = { onOrderClick() },
                         Modifier
                             .fillMaxWidth(),
                         colors = ButtonDefaults.buttonColors(
@@ -98,15 +98,13 @@ fun ProductDetailsScreen(
     }
 }
 
-
 @Preview
 @Composable
-fun ProductDetailsScreenPreview() {
+fun ProductDetailsScreenWithLoadingStatePreview() {
     PanucciTheme {
         Surface {
             ProductDetailsScreen(
-                uiState = ProductDetailsUiState.Success(
-                    sampleProducts.random())
+                uiState = ProductDetailsUiState.Loading,
             )
         }
     }
@@ -114,11 +112,25 @@ fun ProductDetailsScreenPreview() {
 
 @Preview
 @Composable
-fun ProductDetailsScreenWithFailurePreview() {
+fun ProductDetailsScreenWithSuccessStatePreview() {
     PanucciTheme {
         Surface {
             ProductDetailsScreen(
-                uiState = ProductDetailsUiState.Failure,
+                uiState = ProductDetailsUiState.Success(
+                    sampleProducts.random()
+                )
+            )
+        }
+    }
+}
+
+@Preview
+@Composable
+fun ProductDetailsScreenWithFailureStatePreview() {
+    PanucciTheme {
+        Surface {
+            ProductDetailsScreen(
+                uiState = ProductDetailsUiState.Failure
             )
         }
     }
