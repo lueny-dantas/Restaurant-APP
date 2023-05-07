@@ -172,9 +172,7 @@ fun CheckoutScreenWithoutProductsPreview() {
     PanucciTheme {
         Surface {
             CheckoutScreen(
-                uiState = CheckoutUiState(
-                    products = sampleProducts
-                )
+                uiState = CheckoutUiState()
             )
         }
     }
