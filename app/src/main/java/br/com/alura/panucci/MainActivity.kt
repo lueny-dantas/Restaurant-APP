@@ -13,6 +13,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import br.com.alura.panucci.navigation.*
@@ -20,6 +21,7 @@ import br.com.alura.panucci.ui.components.BottomAppBarItem
 import br.com.alura.panucci.ui.components.PanucciBottomAppBar
 import br.com.alura.panucci.ui.components.bottomAppBarItems
 import br.com.alura.panucci.ui.theme.PanucciTheme
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
@@ -27,15 +29,26 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-            val backStackEntryState by navController.currentBackStackEntryAsState()
-            val currentDestination = backStackEntryState?.destination
-
             LaunchedEffect(Unit) {
                 navController.addOnDestinationChangedListener { _, _, _ ->
                     val routes = navController.backQueue.map {
                         it.destination.route
                     }
                     Log.i("MainActivity", "onCreate: back stack - $routes")
+                }
+            }
+            val backStackEntryState by navController.currentBackStackEntryAsState()
+            val orderDoneMessage = backStackEntryState
+                ?.savedStateHandle
+                ?.getStateFlow<String?>("order_done", null)
+                ?.collectAsState()
+            Log.i("MainActivity", "onCreate: order done message ${orderDoneMessage?.value} ")
+            val currentDestination = backStackEntryState?.destination
+            val snackbarHostState = remember { SnackbarHostState() }
+            val scope = rememberCoroutineScope()
+            orderDoneMessage?.value?.let { message ->
+                scope.launch {
+                    snackbarHostState.showSnackbar(message = message)
                 }
             }
 
@@ -65,6 +78,7 @@ class MainActivity : ComponentActivity() {
                     }
 
                     PanucciApp(
+                        snackbarHostState = snackbarHostState,
                         bottomAppBarItemSelected = selectedItem,
                         onBottomAppBarItemSelectedChange = { item ->
                             navController.navigateItemWithPopUpTo(item)
@@ -95,9 +109,17 @@ class MainActivity : ComponentActivity() {
         isShowTopBar: Boolean = false,
         isShowBottomBar: Boolean = false,
         isShowFab: Boolean = false,
+        snackbarHostState: SnackbarHostState = SnackbarHostState(),
         content: @Composable () -> Unit
     ) {
         Scaffold(
+            snackbarHost = {
+                SnackbarHost(hostState = snackbarHostState) { data ->
+                    Snackbar(Modifier.padding(8.dp)) {
+                        Text(text = data.visuals.message)
+                    }
+                }
+            },
             topBar = {
                 if (isShowTopBar) {
                     CenterAlignedTopAppBar(
@@ -142,7 +164,7 @@ class MainActivity : ComponentActivity() {
     private fun PanucciAppPreview() {
         PanucciTheme {
             Surface {
-                PanucciApp {}
+                PanucciApp(content = {})
 
             }
         }

@@ -28,6 +28,8 @@ fun AppNavHost(navController: NavHostController) {
         )
         checkoutScreen(
             onPopBackStack = {
+                navController.currentBackStackEntry?.savedStateHandle
+                    ?.set("order_done", " ✔ Pedido Realizado com sucesso")
                 navController.navigateUp()
             },
         )
