@@ -11,7 +11,7 @@ import androidx.navigation.navDeepLink
 import br.com.alura.panucci.ui.screens.ProductDetailsScreen
 import br.com.alura.panucci.ui.viewmodels.ProductDetailsViewModel
 
-private const val productDetailsRoute = "productDetails"
+const val productDetailsRoute = "productDetails"
 internal const val productIdArgument = "productId"
 
 fun NavGraphBuilder.productDetailsScreen(
@@ -31,9 +31,7 @@ fun NavGraphBuilder.productDetailsScreen(
                 factory = ProductDetailsViewModel.Factory
             )
             val uiState by viewModel.uiState.collectAsState()
-//            LaunchedEffect(Unit) {
-//                viewModel.findProductById(id)
-//            }
+
             ProductDetailsScreen(
                 uiState = uiState,
                 onTryFindProductAgainClick = {
