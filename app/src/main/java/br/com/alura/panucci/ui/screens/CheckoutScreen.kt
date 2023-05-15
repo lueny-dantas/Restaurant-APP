@@ -17,6 +17,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.com.alura.panucci.sampledata.sampleCheckout
+import br.com.alura.panucci.sampledata.sampleHighlightsProducts
 import br.com.alura.panucci.sampledata.sampleProducts
 import br.com.alura.panucci.ui.components.CheckoutItemCard
 import br.com.alura.panucci.ui.theme.PanucciTheme
@@ -49,7 +51,7 @@ fun CheckoutScreen(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
             }
-            items(products) { p ->
+            items(sampleCheckout) { p ->
                 CheckoutItemCard(product = p)
                 Spacer(Modifier.height(16.dp))
             }
@@ -108,21 +110,21 @@ fun CheckoutScreen(
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             Text(text = "Pedido")
-                            Text(text = "9.0")
+                            Text(text = "157,96")
                         }
                         Row(
                             Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             Text(text = "Serviço (10%)")
-                            Text(text = "9.0")
+                            Text(text = "15,80")
                         }
                         Row(
                             Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             Text(text = "Total")
-                            Text(text = "9.0")
+                            Text(text = "173,76")
                         }
                     }
                 }
@@ -144,7 +146,7 @@ fun CheckoutScreen(
             )
             Spacer(modifier = Modifier.width(8.dp))
             Text(
-                text = "Pedir",
+                text = "Finalizar",
                 color = Color.White
             )
         }
@@ -158,21 +160,10 @@ fun CheckoutScreenPreview() {
         Surface {
             CheckoutScreen(
                 uiState = CheckoutUiState(
-                    products = sampleProducts
+                    products = sampleHighlightsProducts
                 )
             )
         }
     }
 }
 
-@Preview
-@Composable
-fun CheckoutScreenWithoutProductsPreview() {
-    PanucciTheme {
-        Surface {
-            CheckoutScreen(
-                uiState = CheckoutUiState(),
-            )
-        }
-    }
-}

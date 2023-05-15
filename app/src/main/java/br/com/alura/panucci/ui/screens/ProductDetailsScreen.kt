@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.alura.panucci.R
-import br.com.alura.panucci.sampledata.sampleProducts
+import br.com.alura.panucci.sampledata.sampleHighlightsProducts
 import br.com.alura.panucci.ui.theme.PanucciTheme
 import br.com.alura.panucci.ui.uistate.ProductDetailsUiState
 import coil.compose.AsyncImage
@@ -120,7 +120,7 @@ fun ProductDetailsScreenWithSuccessStatePreview() {
         Surface {
             ProductDetailsScreen(
                 uiState = ProductDetailsUiState.Success(
-                    sampleProducts.random()
+                    sampleHighlightsProducts.random()
                 )
             )
         }

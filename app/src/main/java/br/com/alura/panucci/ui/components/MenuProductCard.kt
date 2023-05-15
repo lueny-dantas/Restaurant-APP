@@ -14,8 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.alura.panucci.R
 import br.com.alura.panucci.model.Product
-import br.com.alura.panucci.sampledata.sampleProductWithImage
-import br.com.alura.panucci.sampledata.sampleProductWithoutImage
+import br.com.alura.panucci.sampledata.sampleMenuProducts
 import br.com.alura.panucci.ui.theme.PanucciTheme
 import coil.compose.AsyncImage
 
@@ -67,22 +66,13 @@ fun MenuProductCard(
     }
 }
 
-@Preview
-@Composable
-fun MenuProductCardPreview() {
-    PanucciTheme {
-        MenuProductCard(
-            product = sampleProductWithoutImage
-        )
-    }
-}
 
 @Preview
 @Composable
 fun MenuProductCardWithImagePreview() {
     PanucciTheme {
         MenuProductCard(
-            product = sampleProductWithImage
+            product = sampleMenuProducts.first()
         )
     }
 }

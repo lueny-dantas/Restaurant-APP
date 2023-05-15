@@ -22,8 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.alura.panucci.R
 import br.com.alura.panucci.model.Product
-import br.com.alura.panucci.sampledata.sampleProductWithImage
-import br.com.alura.panucci.sampledata.sampleProductWithoutImage
+import br.com.alura.panucci.sampledata.sampleMenuProducts
 import br.com.alura.panucci.ui.theme.CheckoutCircleButton
 import br.com.alura.panucci.ui.theme.PanucciTheme
 import coil.compose.AsyncImage
@@ -49,9 +48,9 @@ fun CheckoutItemCard(
                     .weight(9f)
                     .fillMaxHeight()
             ) {
-                product.image?.let { image ->
+                Column {
                     AsyncImage(
-                        model = image,
+                        model = product.image,
                         contentDescription = null,
                         Modifier.width(80.dp),
                         placeholder = painterResource(
@@ -119,22 +118,13 @@ fun CheckoutItemCard(
     }
 }
 
-@Preview
-@Composable
-private fun CheckoutItemCardPreview() {
-    PanucciTheme {
-        CheckoutItemCard(
-            product = sampleProductWithoutImage
-        )
-    }
-}
 
 @Preview
 @Composable
 private fun CheckoutItemCardWithImagePreview() {
     PanucciTheme {
         CheckoutItemCard(
-            product = sampleProductWithImage
+            product = sampleMenuProducts.first()
         )
     }
 }

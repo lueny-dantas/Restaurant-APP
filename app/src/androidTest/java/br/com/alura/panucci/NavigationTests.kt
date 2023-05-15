@@ -7,7 +7,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
 import br.com.alura.panucci.navigation.*
-import br.com.alura.panucci.sampledata.sampleProducts
+import br.com.alura.panucci.sampledata.sampleHighlightsProducts
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -196,7 +196,7 @@ class NavigationTests {
         composeTestRule.onRoot().printToLog("panucci app")
 
         composeTestRule.runOnUiThread {
-            navController.navigateToProductDetails(sampleProducts.first().id)
+            navController.navigateToProductDetails(sampleHighlightsProducts.first().id)
         }
 
         composeTestRule.waitUntil(3000) {
@@ -256,7 +256,7 @@ class NavigationTests {
             .assertIsDisplayed()
 
         composeTestRule.runOnUiThread {
-            navController.navigateToProductDetails(sampleProducts.random().id)
+            navController.navigateToProductDetails(sampleHighlightsProducts.random().id)
         }
         // Foi usado o `assertDoesNotExist()`, pois o `assertIsNotDisplayed()` só funciona se achar o nó
         composeTestRule.onNodeWithTag(bottomAppBarTag)
@@ -302,7 +302,7 @@ class NavigationTests {
         composeTestRule.assertThatFabDoesNotExist()
 
         composeTestRule.runOnUiThread {
-            navController.navigateToProductDetails(sampleProducts.random().id)
+            navController.navigateToProductDetails(sampleHighlightsProducts.random().id)
         }
         composeTestRule.assertThatFabDoesNotExist()
 
@@ -342,7 +342,7 @@ class NavigationTests {
                     .assertDoesNotExist()
             }
             runOnUiThread {
-                navController.navigateToProductDetails(sampleProducts.random().id)
+                navController.navigateToProductDetails(sampleHighlightsProducts.random().id)
             }
             assertThatTopAppBarDoesNotExist()
 

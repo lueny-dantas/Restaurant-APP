@@ -17,8 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.alura.panucci.R
 import br.com.alura.panucci.model.Product
-import br.com.alura.panucci.sampledata.sampleProductWithImage
-import br.com.alura.panucci.sampledata.sampleProductWithoutImage
+import br.com.alura.panucci.sampledata.sampleProducts
 import br.com.alura.panucci.ui.theme.PanucciTheme
 import coil.compose.AsyncImage
 
@@ -84,22 +83,13 @@ fun HighlightProductCard(
     }
 }
 
-@Preview
-@Composable
-private fun HighlightProductPreview() {
-    PanucciTheme {
-        HighlightProductCard(
-            product = sampleProductWithoutImage
-        )
-    }
-}
 
 @Preview
 @Composable
 private fun HighlightProductCardWithImagePreview() {
     PanucciTheme {
         HighlightProductCard(
-            product = sampleProductWithImage
+            product = sampleProducts.first()
         )
     }
 }

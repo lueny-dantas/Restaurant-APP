@@ -15,7 +15,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.alura.panucci.model.Product
-import br.com.alura.panucci.sampledata.sampleProducts
+import br.com.alura.panucci.sampledata.sampleHighlightsProducts
+import br.com.alura.panucci.sampledata.sampleMenuProducts
 import br.com.alura.panucci.ui.components.MenuProductCard
 import br.com.alura.panucci.ui.theme.PanucciTheme
 import br.com.alura.panucci.ui.theme.caveatFont
@@ -50,7 +51,7 @@ fun MenuListScreen(
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            items(products) { p ->
+            items(sampleMenuProducts) { p ->
                 MenuProductCard(
                     product = p,
                     Modifier
@@ -71,7 +72,7 @@ fun MenuListScreenPreview() {
         Surface {
             MenuListScreen(
                 uiState = MenuListUiState(
-                    products = sampleProducts
+                    products = sampleHighlightsProducts
                 )
             )
         }

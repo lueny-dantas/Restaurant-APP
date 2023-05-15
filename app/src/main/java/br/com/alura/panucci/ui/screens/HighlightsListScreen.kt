@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.alura.panucci.model.Product
-import br.com.alura.panucci.sampledata.sampleProducts
+import br.com.alura.panucci.sampledata.sampleHighlightsProducts
 import br.com.alura.panucci.ui.components.HighlightProductCard
 import br.com.alura.panucci.ui.theme.PanucciTheme
 import br.com.alura.panucci.ui.theme.caveatFont
@@ -52,7 +52,7 @@ fun HighlightsListScreen(
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            items(products) { p ->
+            items(sampleHighlightsProducts) { p ->
                 HighlightProductCard(
                     product = p,
                     Modifier
@@ -75,7 +75,7 @@ fun HighlightsListScreenPreview() {
             HighlightsListScreen(
                 title = "Destaques do dia",
                 uiState = HighlightsListUiState(
-                    products = sampleProducts
+                    products = sampleHighlightsProducts
                 )
             )
         }

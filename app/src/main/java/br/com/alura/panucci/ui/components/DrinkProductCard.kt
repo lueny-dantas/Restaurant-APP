@@ -11,8 +11,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.alura.panucci.model.Product
-import br.com.alura.panucci.sampledata.sampleProductWithImage
-import br.com.alura.panucci.sampledata.sampleProductWithoutImage
+import br.com.alura.panucci.sampledata.sampleDrinks
 import br.com.alura.panucci.ui.theme.PanucciTheme
 import coil.compose.AsyncImage
 
@@ -56,22 +55,13 @@ fun DrinkProductCard(
     }
 }
 
-@Preview
-@Composable
-private fun DrinkProductCardPreview() {
-    PanucciTheme {
-        DrinkProductCard(
-            product = sampleProductWithoutImage
-        )
-    }
-}
 
 @Preview
 @Composable
 private fun DrinkProductCardWithImagePreview() {
     PanucciTheme {
         DrinkProductCard(
-            product = sampleProductWithImage
+            product = sampleDrinks.first()
         )
     }
 }
