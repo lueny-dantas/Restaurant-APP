@@ -110,7 +110,7 @@ val sampleDrinks = listOf(
 
     ),
     Product(
-        name = "Cidra de maçã negroni",
+        name = "Cidra de maçã",
         price = BigDecimal("24.99"),
         description = "Taça com 200 ml",
         image = "https://receitanatureba.com/wp-content/uploads/2017/12/Como-Fazer-Sidra-de-Maca-Com-ou-Sem-Alcool.jpg "
@@ -159,27 +159,6 @@ val sampleCheckout = listOf(
         image = "https://s2.glbimg.com/TqRJtLZOmLyV-a1O5AnSRH7w7wQ=/0x0:260x160/984x0/smart/filters:strip_icc()/g.glbimg.com/og/gs/gsat5/f/thumbs/materia/2014/04/30/spaghetti-frutos-mar-260_471957270184942383.jpg "
 
     ),
-    Product(
-        name = " Nhoque de mandioquinha",
-        price = BigDecimal("49.99"),
-        description = "Massa Servido ao molho fresco. ",
-        image = "https://claudia.abril.com.br/wp-content/uploads/2020/02/receita-nhoque-mandioquinha-sem-gluten1.jpg"
-    ),
-    Product(
-        name = "Suco de Laranja",
-        price = BigDecimal("12.99"),
-        description = " Jarra 1 lt",
-        image = "https://w7.pngwing.com/pngs/363/444/png-transparent-pitcher-glass-fruit-orange-juice-citrus-dessert.png"
-
-    ),
-    Product(
-        name = "Cappuccino",
-        price = BigDecimal("14.99"),
-        description = "Xícara com 150ml ",
-        image = "https://img.freepik.com/vetores-gratis/xicara-branca-de-cafe-quente-com-canela-no-pires-e-feijao-na-mesa-de-madeira-realista_1284-56783.jpg?w=2000 "
-
-    ),
-
 )
 
 

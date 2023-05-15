@@ -49,7 +49,7 @@ fun DrinkProductCard(
                 overflow = TextOverflow.Ellipsis
             )
             Text(
-                text = product.price.toPlainString(), maxLines = 1
+                text = product.presentationPrice, maxLines = 1
             )
         }
     }

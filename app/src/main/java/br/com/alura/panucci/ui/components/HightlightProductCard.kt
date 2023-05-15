@@ -51,7 +51,7 @@ fun HighlightProductCard(
                 )
             ) {
                 Text(text = product.name)
-                Text(text = product.price.toString())
+                Text(text = product.presentationPrice)
                 Spacer(Modifier.height(16.dp))
                 Text(
                     text = product.description,

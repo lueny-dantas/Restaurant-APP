@@ -44,7 +44,7 @@ fun MenuProductCard(
                 )
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    text = product.price.toPlainString(),
+                    text = product.presentationPrice,
                     Modifier.fillMaxWidth(),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,

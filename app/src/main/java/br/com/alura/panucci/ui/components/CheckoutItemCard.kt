@@ -70,7 +70,7 @@ fun CheckoutItemCard(
                         overflow = TextOverflow.Ellipsis
                     )
                     Spacer(modifier = Modifier.height(8.dp))
-                    Text(text = product.price.toPlainString())
+                    Text(text = product.presentationPrice)
                 }
             }
             Column(

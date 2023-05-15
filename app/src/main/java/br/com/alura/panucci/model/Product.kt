@@ -9,5 +9,7 @@ data class Product(
     val price: BigDecimal,
     val description: String,
     val image: String? = null
-
-)
+){
+    val presentationPrice
+        get() = "R$ " + price.toPlainString()
+}
