@@ -110,21 +110,21 @@ fun CheckoutScreen(
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             Text(text = "Pedido")
-                            Text(text = "157,96")
+                            Text(text = "R$ 79,99")
                         }
                         Row(
                             Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             Text(text = "Serviço (10%)")
-                            Text(text = "15,80")
+                            Text(text = "R$ 7,99")
                         }
                         Row(
                             Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             Text(text = "Total")
-                            Text(text = "173,76")
+                            Text(text = "R$ 87,98")
                         }
                     }
                 }
